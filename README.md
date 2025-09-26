@@ -1,12 +1,12 @@
 这是我们小组的 ADS 课程项目仓库  
-本仓库用于存放相关的 **C 语言代码、报告、资料** 等文件。在提交代码、更新仓库时可以参考以下工作流：
+本仓库用于存放相关的 **C 语言代码、报告、资料** 等文件。以下是使用这个仓库进行合作的一个小小教程，基本不需要git基础，可以参考一下：
 
 ---
 
-## 第一次使用：克隆仓库到本地
+## 1.克隆仓库到本地
 
-1. 打开终端，进入你想存放项目的目录。
-2. 在wsl中执行以下命令克隆仓库（替换为实际的仓库地址）：
+（1）打开终端，进入你想存放项目的目录。
+（2）在wsl中执行以下命令克隆仓库（替换为实际的仓库地址）：
 
 ```bash
 git clone https://github.com/tarduspura/ADS-25fa-project.git
@@ -15,7 +15,7 @@ git clone https://github.com/tarduspura/ADS-25fa-project.git
 
 >tip:如果clone时需要输入用户名和密码，请注意这里的用户名是你的github用户名，而密码是github生成的个人访问令牌(PAT)，而不是登录github时的密码。以下步骤可以创建你的PAT：1.点击首页右上方的头像，找到settings。2.进入settings后下拉侧边栏到底部找到Developer settings。3.点击Personal access tokens。4.点击Generate new token，classic就行，有效期随便，随时可以生成新的。5.PAT生成之后只会显示一次，要注意复制。
 
-3.检查远程仓库连接
+（3）检查远程仓库连接
 
 ```bash
 git remote -v
@@ -26,7 +26,7 @@ origin  git@github.com:tarduspura/ADS-25fa-project.git (push)
 ```
 这表明你本地的这个文件夹已经和github上的远程仓库建立联系了。
 
-## 创建自己的分支
+## 2.创建自己的分支
 
 为了可以在本地自由地修改文件和上传到仓库，如果直接在master分支上修改我们就会改乱了，所以可以创建自己的分支之后先在自己创建的分支结构上修改和写代码
 
@@ -38,6 +38,11 @@ git branch
 git branch -a
 
 //创建并切换到新分支
+//feature/xxx可以说是git的一个命名规范
+//不是硬性要求，可以让别人知道你这个分支在进行什么操作
+//但我们人比较的少，任务也很少，所以不一定要遵循
+//commit的时候在message里加就可以
+//出于方便，下面的branch就省略了
 git checkout -b feature/your-branch-name
 
 //切换到已有分支
@@ -47,22 +52,53 @@ git checkout yout-branch-name
 git branch -d your-branch-name
 ```
 
-## 提交修改
+## 3.修改和推送
 
-接下来就是关键的修改部分，我们的核心目的是，将我们在本地的更新最终合并到main分支
-
+在本地修改了代码，或者新写了报告之后，需要把修改提交到仓库大家都能看到的地方。
 ```bash
 //检查文件状态，红色表示未暂存，绿色表示已经暂存了
 git status
 
-//加入暂存区
+//加入暂存区（在本地）
 git add your-filename
 //或者一次性添加所有改动
 git add .
 
-//然后提交修改（还是在本地）
+//然后提交修改
 git commit -m "描述修改内容，可以让别人知道你修改了什么，需要清晰且简洁"
+
+//最后上传到远程仓库
+git push origin your-branch-name
 ```
+
+## 4.合并修改
+
+接下来就是关键的修改部分，我们的核心目的是，将我们在本地的更新最终合并到main分支当中。一般来说我们有两种方法。
+
+### （1）合并主分支之后提交
+
+```bash
+//1.先切换回主分支
+git checkout main
+
+//2.拉取最新主分支代码到本地，这很重要，可以防止出现冲突
+git pull origin main
+
+//3.合并你的分支到主分支，这样主分支就合并了你的修改
+git merge your-branch-name
+
+//4.add/commit/push三件套
+git add .
+git commit -m "description"
+git push origin main
+```
+这样仓库的主分支中就包含你的修改了！
+
+### （2）Pull Request(recommend)
+好处在于，需要申请合并后由其他组员审核后再决定是否合并，可以防止误操作导致主分支受到污染（但就我们这点小破东西也污染不了什么）。也可以追溯合并历史，方便回溯。
+操作方式也特别简单，上一步中不是已经在我们的分支上push新的修改到仓库了吗，那就可以点击仓库上方的Pull Request/New
+
+
 
 ## 推送分支到github远程仓库
 
@@ -73,7 +109,7 @@ git push -u origin feature/your-branch-name
 >远程跟踪就是让github记住这个分支是你会更新的，这样以后你只需要使用git push或git pull同步远程分支而无需指定是你的分支。
 
 ```bash
-git push origin your-branch-name
+git push origin feature/your-branch-name
 
 //远程跟踪后就可以
 git push
