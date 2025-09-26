@@ -13,7 +13,7 @@ git clone https://github.com/tarduspura/ADS-25fa-project.git
 ```
 这样你就可以拉取最新的文件夹结构到你的本地。
 
->tip:如果clone时需要输入用户名和密码，请注意这里的用户名是你的github用户名，而密码是github生成的密钥而不是登录github时的密码。关于密钥的生成，可以
+>tip:如果clone时需要输入用户名和密码，请注意这里的用户名是你的github用户名，而密码是github生成的个人访问令牌(PAT)，而不是登录github时的密码。以下步骤可以创建你的PAT：1.点击首页右上方的头像，找到settings。2.进入settings后下拉侧边栏到底部找到Developer settings。3.点击Personal access tokens。4.点击Generate new token，classic就行，有效期随便，随时可以生成新的。5.PAT生成之后只会显示一次，要注意复制。
 
 
 ## 创建自己的分支
