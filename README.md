@@ -6,7 +6,7 @@
 ## 1.克隆仓库到本地
 
 （1）打开终端，进入你想存放项目的目录。
-（2）在wsl中执行以下命令克隆仓库（替换为实际的仓库地址）：
+（2）在wsl中执行以下命令克隆仓库：
 
 ```bash
 git clone https://github.com/tarduspura/ADS-25fa-project.git
