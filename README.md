@@ -18,7 +18,7 @@ git clone https://github.com/tarduspura/ADS-25fa-project.git
 
 ## 创建自己的分支
 
-为了可以在本地自由地修改文件和上传到仓库，如果直接在main分支上修改我们就会改乱了，所以可以创建自己的分支之后先在自己创建的分支结构上修改和写代码
+为了可以在本地自由地修改文件和上传到仓库，如果直接在master分支上修改我们就会改乱了，所以可以创建自己的分支之后先在自己创建的分支结构上修改和写代码
 
 ```bash
 //查看当前分支
@@ -26,6 +26,12 @@ git branch
 
 //创建并切换到新分支
 git checkout -b your-branch-name
+
+//切换到已有分支
+git checkout yout-branch-name
+
+//删除已有分支
+git branch -d your-branch-name
 
 //查看所有分支
 git branch -a
