@@ -152,7 +152,7 @@ git branch --set-upstream-to=origin/your-branch-name your-branch-name
 git branch --unset-upstream
 ```
 
-### (5)如何使用远程追踪分支
+### （5）如何使用远程追踪分支
 远程追踪分支的好处是可以在本地方便地查看别人都做了些什么
 
 1.``git fetch``
