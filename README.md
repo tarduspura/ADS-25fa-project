@@ -114,20 +114,83 @@ git push origin --delete your-used-branch
 ### （1）什么是远程跟踪分支
 
 远程跟踪分支是本地 Git 仓库中对远程仓库分支状态的“快照”或“镜像”，它们不是你直接操作的分支（不能 checkout 修改），而是用来记录远程仓库的最新状态，供你拉取、合并、对比使用。
+```bash
+//格式为<远程名>/<分支名>
+origin/main
+```
 
-### （2）设置远程跟踪分支
 
+### （2）查看远程跟踪分支
+
+```bash
+git branch -r
+
+//输出示例
+origin/main
+origin/develop
+origin/feature/张三-登录页
+origin/feature/李四-注册页
+```
+
+### （3）设置远程跟踪分支
+
+方法一：创建本地分支并指定追踪远程分支
+```bash
+git checkout -b your-branch-name origin/your-branch-name
+```
+这样你就创建了一个本地分支your-branch-name，并且它追踪着远程分支origin/your-branch-name
+
+方法二：对已有的分支设置远程追踪
+
+```bash
+git branch --set-upstream-to=origin/your-branch-name your-branch-name
+```
+
+### （4）取消远程跟踪
+
+```bash
+git branch --unset-upstream
+```
+
+### (5)如何使用远程追踪分支
+远程追踪分支的好处是可以在本地方便地查看别人都做了些什么
+
+1.``git fetch``
+```bash
+git fetch origin
+```
+相当于把远程仓库的所有最新提交“同步”到你的本地远程跟踪分支（如 origin/main、origin/feature/xxx），但不会影响你当前工作的本地分支，你只是可以在origin/your-branch-name中查看最新的修改。
+
+2.``git pull``
+等价于``git fetch`` + ``git merge``，从远程仓库拉取所有最新的变化，并合并到你的当前分支。
+```bash
+git pull origin main
+```
+
+3.查看当前仓库和远程的差别
+
+```bash
+//查看本地（main）与远程（origin/main）的差异
+git diff main origin/main
+//查看当前分支是否落后
+git status
+```
 
 
 ## 7.注意事项
 
 ### （1）与远程同步更新
 
-在开发过程中，每次进行开发前需要拉取其他人最新修改的仓库的内容（当然也有可能没人更新，但也可以拉一下，不然多人修改同一个文件时会产生冲突）
+在开发过程中，每次进行开发前需要拉取其他人最新修改的仓库的内容（当然也有可能没人更新，但也可以拉一下，不然多人修改同一个文件时会产生冲突）。当然你也可以先用远程追踪分支看两眼有没有不同，但一般来说没这个必要，直接pull就是了。
 
 ```bash
 git pull origin main
 ```
+>tip：但注意，只能在主分支上执行这个操作，在功能分支上执行就有可能会把功能分支污染了。
+
+### （2）多多使用
+
+git其实就是一个有助于多人协同完成线上任务的工具，我们最终的目的就是要一起建设我们的主分支，但在建设过程中为了避免冲突和便利操作，才引入了分支概念，可以创建新的分支，提交修改，申请合并，整个逻辑还是很清晰的，只要多多使用肯定会体会到它的优势。
 
 
 
